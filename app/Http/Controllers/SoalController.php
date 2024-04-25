@@ -103,7 +103,14 @@ class SoalController extends Controller
             }
        }
 
-       ksort($charCount);
+       $this->ksortIgnoreCase($charCount);
        return $charCount;
+    }
+
+    // Fungsi khusus untuk mengurutkan array asosiatif berdasarkan kunci tanpa memperhatikan huruf besar/kecil
+    function ksortIgnoreCase(&$array) {
+        uksort($array, function($a, $b) {
+            return strtolower($a) <=> strtolower($b);
+        });
     }
 }
